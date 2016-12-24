@@ -15,9 +15,7 @@ Route::get('/record-amount', 'Controller@showMain')->name('record-main');
 
 Route::post('/record-amount', 'Controller@saveRecord')->name('record-amount');
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/' , 'Controller@showMain')->name('record-main');
 
 Route::get('/backoffice-daily-report', 'Controller@backOfficeDailyReport')->name('bo-rp-dl'); 
 Route::post('/backoffice-daily-report', 'Controller@backOfficeDailyReport')->name('bo-rp-ds'); 

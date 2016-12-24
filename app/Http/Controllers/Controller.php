@@ -38,7 +38,6 @@ class Controller extends BaseController
         $latestRecord = $rec->getFiveLatestRec();
         
         return view('main')->with([
-            'success' => true,
             'latest_record' => $latestRecord
         ]);
     }
