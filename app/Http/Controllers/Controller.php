@@ -42,4 +42,27 @@ class Controller extends BaseController
             'latest_record' => $latestRecord
         ]);
     }
+    
+    public function backOfficeDailyReport(Request $request)
+    {
+        $labelColor = ['primary', 'success', 'info', 'warning'];
+        $params = $request->only('date');
+        $date   = $params['date'] ?? date('Y-m-d');
+        $rec    = new SellRecord();
+        
+        
+        $totalToday = $rec->getTotalByDate($date);
+        $totalDep = $rec->getTotalDepartmentByDate($date);
+        $totalSale = $rec->getTotalSaleByDate($date);
+        foreach ($totalSale as $ts) {
+            $totalDetail[$ts->sales_id] = $rec->getSellDetailOfSaleByDate($ts->sales_id, $date);
+        }
+        return view('backoffice-daily-report')->with([
+            'totalToday' => $totalToday,
+            'totalDep' => $totalDep,
+            'totalSale' => $totalSale,
+            'totalDetail' => $totalDetail,
+            'labelColor' => $labelColor
+        ]);
+    }
 }

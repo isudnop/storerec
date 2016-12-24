@@ -19,11 +19,5 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::group(['prefix' => 'backoffice'], function () {
-    Route::get('/daily-report', function () {
-        return view('backoffice-daily-report');
-    });
-    Route::post('/daily-report', function () {
-        return view('backoffice-daily-report');
-    });
-});
+Route::get('/backoffice-daily-report', 'Controller@backOfficeDailyReport')->name('bo-rp-dl'); 
+Route::post('/backoffice-daily-report', 'Controller@backOfficeDailyReport')->name('bo-rp-ds'); 

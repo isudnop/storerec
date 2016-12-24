@@ -20,6 +20,42 @@ class SellRecord extends Model
         return $this->orderBy('created_at', 'desc')->limit(5)->get();
     }
     
+    public function getTotalByDate($date)
+    {
+        return $this
+        ->whereDate('created_at', '=', $date)
+        ->sum('sell_amount');
+    }
+    
+    public function getTotalDepartmentByDate($date)
+    {
+        return $this
+        ->selectRaw('department_id, sum(sell_amount) as sum_sell')
+        ->whereDate('created_at', '=', $date)
+        ->groupBy('department_id')
+        ->get();
+    }
+    
+    public function getTotalSaleByDate($date)
+    {
+        return $this
+        ->selectRaw('sales_id, sum(sell_amount) as sum_sell, count(sell_amount) as count_sell')
+        ->whereDate('created_at', '=', $date)
+        ->groupBy('sales_id')
+        ->get();
+    }
+    
+    public function getSellDetailOfSaleByDate($sales_id, $date)
+    {
+        return $this
+        ->selectRaw('sales_id, department_id, sum(sell_amount) as sum_sell, count(sell_amount) as count_sell')
+        ->whereDate('created_at', '=', $date)
+        ->where('sales_id', '=', $sales_id)
+        ->groupBy('sales_id')
+        ->groupBy('department_id')
+        ->get();
+    }
+    
     public function sales()
     {
         return $this->belongsTo('\App\Models\Sales');
@@ -27,6 +63,6 @@ class SellRecord extends Model
     
     public function department()
     {
-        return $this->belongsTo('\App\Models\Department' ,'department_id');
+        return $this->belongsTo('\App\Models\Department');
     }
 }

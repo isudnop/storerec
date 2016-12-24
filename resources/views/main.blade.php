@@ -9,13 +9,13 @@
                         </div>
                     @endif    
                     <div class=" col-md-4 col-md-offset-4 top-buffer fill-row">
-                        รหัสแผนก : <input type="text" placeholder=  "ขื่อแผนก" name="department_id" value="" required>
+                        <span class="label label-danger">รหัสแผนก</span> : <input type="text" placeholder=  "รหัส" name="department_id" value="" required>
                     </div>
                     <div class="col-md-4 col-md-offset-4 top-buffer fill-row ">
-                        ยอดสินค้า : <input type="text" placeholder="00.00 บาท" id="amount" name="sell_amount" value="" required>
+                        <span class="label label-success">ยอดสินค้า</span> : <input type="text" placeholder="0 บาท" id="amount" name="sell_amount" value="" required>
                     </div>
                     <div class="col-md-4 col-md-offset-4 top-buffer fill-row">
-                        รหัสผู้ขาย : <input type="text" placeholder="ชื่อ" name="sales_id" value="" required>
+                        <span class="label label-info">รหัสผู้ขาย</span> : <input type="text" placeholder="รหัส" name="sales_id" value="" required>
                     </div>
 
                 <div class="col-md-4 col-md-offset-4 top-buffer">
