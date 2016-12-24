@@ -15,7 +15,7 @@
                         ยอดสินค้า : <input type="text" placeholder="00.00 บาท" id="amount" name="sell_amount" value="" required>
                     </div>
                     <div class="col-md-4 col-md-offset-4 top-buffer fill-row">
-                        รหัสผู้ขาย : <input type="text" placeholder="ชื่อ" name="sale_id" value="" required>
+                        รหัสผู้ขาย : <input type="text" placeholder="ชื่อ" name="sales_id" value="" required>
                     </div>
 
                 <div class="col-md-4 col-md-offset-4 top-buffer">
@@ -39,8 +39,8 @@
                 <tr>
                     <td>{{ $lr->created_at}}</td>
                     <td>{{ $lr->sell_amount}}</td>
-                    <td>{{ $lr->sale_id}}</td>
-                    <td>{{ $lr->department_id}}</td>
+                    <td>{{ $lr->sales->name }}</td>
+                    <td>{{ $lr->department->department_name}}</td>
                 </tr>
                 @endforeach
             @endif
