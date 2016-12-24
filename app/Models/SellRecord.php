@@ -10,9 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SellRecord extends Model
 {
     protected $fillable = [
-        'sell_amount', 'sale_code', 'department'
+        'sell_amount', 'sale_id', 'department_id'
     ];
     
     protected $table = 'sellrecord';
     
+    public function getFiveLatestRec()
+    {
+        return $this->orderBy('created_at', 'desc')->limit(5)->get();
+    }
 }

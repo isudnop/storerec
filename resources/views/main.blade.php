@@ -1,28 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+@include('partials.header')
+<div class="container content-center">
+    <h1 class="col-md-4 col-md-offset-4">ระบบร้าน</h1>
+        <form action="/record-amount" method="post">
+            <div class="row col-md-4 col-md-offset-4 top-buffer">
+                    @if(isset($success))
+                        <div class="alert alert-success" role="alert">
+                            <strong>บันทึกเสร็จสิ้น!</strong> 
+                        </div>
+                    @endif    
+                    <div class=" col-md-4 col-md-offset-4 top-buffer fill-row">
+                        รหัสแผนก : <input type="text" placeholder=  "ขื่อแผนก" name="department_id" value="" required>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4 top-buffer fill-row ">
+                        ยอดสินค้า : <input type="text" placeholder="00.00 บาท" id="amount" name="sell_amount" value="" required>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4 top-buffer fill-row">
+                        รหัสผู้ขาย : <input type="text" placeholder="ชื่อ" name="sale_id" value="" required>
+                    </div>
 
-    <!-- Bootstrap -->
-    <link href="css/app.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+                <div class="col-md-4 col-md-offset-4 top-buffer">
+                    <button type="submit" class="btn btn-lg btn-primary" value="submit">บันทึก!</button>
+                </div>
+            </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        </form> 
+        <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>เวลา</th>
+            <th>ยอดสินค้า</th>
+            <th>ผู้ขาย</th>
+            <th>แผนก</th>
+          </tr>
+        </thead>
+        <tbody>
+            @if (isset($latest_record))
+                @foreach ($latest_record as $lr)
+                <tr>
+                    <td>{{ $lr->created_at}}</td>
+                    <td>{{ $lr->sell_amount}}</td>
+                    <td>{{ $lr->sale_id}}</td>
+                    <td>{{ $lr->department_id}}</td>
+                </tr>
+                @endforeach
+            @endif
+        </tbody>
+        </table>
+</div>
+@include('partials.footer')

@@ -11,6 +11,19 @@
 |
 */
 
+Route::get('/record-amount', 'Controller@showMain')->name('record-main');
+
+Route::post('/record-amount', 'Controller@saveRecord')->name('record-amount');
+
 Route::get('/', function () {
     return view('main');
+});
+
+Route::group(['prefix' => 'backoffice'], function () {
+    Route::get('/daily-report', function () {
+        return view('backoffice-daily-report');
+    });
+    Route::post('/daily-report', function () {
+        return view('backoffice-daily-report');
+    });
 });
