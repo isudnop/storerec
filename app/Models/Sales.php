@@ -25,7 +25,4 @@ class Sales extends Model
         return $this->where('sale_name', $name)->first();
     }
     
-    public function getById()
-    {}
-
 }
