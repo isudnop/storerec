@@ -3,6 +3,16 @@
     <h1 class="col-md-4 col-md-offset-4">
         ระบบร้านหลังบ้าน
     </h1>
+    <h1 class="col-md-4 col-md-offset-4">
+        <span class="label label-warning">{{ date('d M Y', strtotime($currentDate))}}</span>
+    </h1>
+    <form action="/backoffice-daily-report" method="post">
+        <div class=" col-md-4 col-md-offset-4 top-buffer fill-row">
+        <input type="text" placeholder="2016-01-01" name="date">
+            <button type="submit" class="btn btn-lg btn-primary" value="submit">เลือก</button>
+        </div>
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    </form>
     
     @foreach ($totalDep as $key => $td)
         <h1 class="col-md-4 col-md-offset-4">

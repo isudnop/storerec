@@ -49,7 +49,7 @@ class Controller extends BaseController
         $params = $request->only('date');
         $date   = $params['date'] ?? date('Y-m-d');
         $rec    = new SellRecord();
-        
+        $totalDetail = [];
         
         $totalToday = $rec->getTotalByDate($date);
         $totalDep = $rec->getTotalDepartmentByDate($date);
@@ -62,7 +62,8 @@ class Controller extends BaseController
             'totalDep' => $totalDep,
             'totalSale' => $totalSale,
             'totalDetail' => $totalDetail,
-            'labelColor' => $labelColor
+            'labelColor' => $labelColor,
+            'currentDate' => $date
         ]);
     }
 }
