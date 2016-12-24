@@ -9,7 +9,7 @@
                         </div>
                     @endif    
                     <div class=" col-md-4 col-md-offset-4 top-buffer fill-row">
-                        <span class="label label-danger">รหัสแผนก</span> : <input type="text" placeholder=  "รหัส" name="department_id" value="" required>
+                        <span class="label label-danger">รหัสแผนก</span> : <input type="text" placeholder=  "รหัส" name="department_id" value="" autofocus="autofocus" required>
                     </div>
                     <div class="col-md-4 col-md-offset-4 top-buffer fill-row ">
                         <span class="label label-success">ยอดสินค้า</span> : <input type="text" placeholder="0 บาท" id="amount" name="sell_amount" value="" required>
