@@ -17,6 +17,13 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function saveRecord(Request $request) {
+        
+        $this->validate($request, [
+            'sell_amount' => 'bail|required|integer',
+            'sales_id' => 'bail|required|integer|exists:Sales,id',
+            'department_id' => 'bail|required|integer|exists:Department,id',
+        ]);
+        
         $params = $request->all();
         
         $rec = new SellRecord();
@@ -32,19 +39,18 @@ class Controller extends BaseController
         
         $latestRecord = $rec->getFiveLatestRec();
         
-        return redirect()->route('record-amount')
-        ->with([
-            'success' => true
-        ]); 
+        return view('main')->with([
+            'latest_record' => $latestRecord
+            ])->withSuccess(true); 
     }
     
     public function showMain(Request $request) {
         $rec = new SellRecord();
         
         $success = $request->get('success') ?? false;
-        
+
         $latestRecord = $rec->getFiveLatestRec();
-        
+
         return view('main')->with([
             'latest_record' => $latestRecord,
             'success' => $success
@@ -77,13 +83,19 @@ class Controller extends BaseController
     
     public function backOfficeShowSummaryReport(Request $request)
     {
-        for($i=0 ; $i < 30 ; $i++){
-            $graphData[$i] = rand(40000, 60000);
-            $graphLabel[$i] = "\"test-str-" . $i . "\"";
+        $daily  = new DailyRemark();
+        $result = $daily->getLatestReport(30);
+        
+        $graphLabel = [];
+        $graphData = [];
+        foreach($result as $res){
+            $graphLabel[] = "\"" . $res->date_of_amount . "\"";
+            $graphData[]  = $res->total_amount;
         }
+
         return view('backoffice-summary-report')->with([
-            'graphData' => $graphData,
-            'graphLabel' => $graphLabel
+            'graphData' => array_reverse($graphData),
+            'graphLabel' => array_reverse($graphLabel)
         ]);
     }
 }

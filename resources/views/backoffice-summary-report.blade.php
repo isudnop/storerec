@@ -1,5 +1,5 @@
 @include('partials.header')
-<div class="container">
+@include('partials.navbar')
     <h1 class="col-md-6 col-md-offset-2">
         รายงาน 30 วันล่าสุด <span class="label label-warning"></span>
     </h1>

@@ -1,7 +1,8 @@
 @include('partials.header')
+@include('partials.navbar')
 <div class="container content-center">
     <h1 class="col-md-6 col-md-offset-2">
-        ระบบร้านหลังบ้าน <span class="label label-warning">{{ date('d M Y', strtotime($currentDate))}}</span>
+        รายงานประจำวัน <span class="label label-warning">{{ date('d M Y', strtotime($currentDate))}}</span>
     </h1>
     <h1 class="col-md-4 col-md-offset-4">
         
