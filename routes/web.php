@@ -10,12 +10,9 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
-Route::get('/record-amount', 'Controller@showMain')->name('record-main');
-
-Route::post('/record-amount', 'Controller@saveRecord')->name('record-amount');
-
 Route::get('/' , 'Controller@showMain')->name('record-main');
-
-Route::get('/backoffice-daily-report', 'Controller@backOfficeDailyReport')->name('bo-rp-dl'); 
-Route::post('/backoffice-daily-report', 'Controller@backOfficeDailyReport')->name('bo-rp-ds'); 
+Route::get('/record-amount', 'Controller@showMain')->name('record-amount');
+Route::post('/record-amount', 'Controller@saveRecord')->name('save-record');
+Route::match(['get', 'post'], '/backoffice-daily-report', 'Controller@backOfficeShowDailyReport')
+    ->name('bo-rp-dl');
+Route::get('/backoffice-summary-report', 'Controller@backOfficeShowSummaryReport')->name('summary-report');

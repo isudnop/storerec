@@ -8,7 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\SellRecord;
 use App\Models\Sales;
+use App\Models\DailyRemark;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class Controller extends BaseController
 {
@@ -24,25 +26,32 @@ class Controller extends BaseController
         $rec->department_id = $params['department_id'];
         $rec->save();
         
+        $daily = DailyRemark::firstOrCreate(['date_of_amount' => date('Y-m-d')]);
+        $daily->total_amount = $daily->total_amount + $params['sell_amount'];
+        $daily->save();
+        
         $latestRecord = $rec->getFiveLatestRec();
         
-        return view('main')->with([
-            'success' => true,
-            'latest_record' => $latestRecord
+        return redirect()->route('record-amount')
+        ->with([
+            'success' => true
         ]); 
     }
     
-    public function showMain() {
+    public function showMain(Request $request) {
         $rec = new SellRecord();
+        
+        $success = $request->get('success') ?? false;
         
         $latestRecord = $rec->getFiveLatestRec();
         
         return view('main')->with([
-            'latest_record' => $latestRecord
+            'latest_record' => $latestRecord,
+            'success' => $success
         ]);
     }
     
-    public function backOfficeDailyReport(Request $request)
+    public function backOfficeShowDailyReport(Request $request)
     {
         $labelColor = ['primary', 'success', 'info', 'warning'];
         $params = $request->only('date');
@@ -63,6 +72,18 @@ class Controller extends BaseController
             'totalDetail' => $totalDetail,
             'labelColor' => $labelColor,
             'currentDate' => $date
+        ]);
+    }
+    
+    public function backOfficeShowSummaryReport(Request $request)
+    {
+        for($i=0 ; $i < 30 ; $i++){
+            $graphData[$i] = rand(40000, 60000);
+            $graphLabel[$i] = "\"test-str-" . $i . "\"";
+        }
+        return view('backoffice-summary-report')->with([
+            'graphData' => $graphData,
+            'graphLabel' => $graphLabel
         ]);
     }
 }
