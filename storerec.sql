@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2016 at 02:41 PM
+-- Generation Time: Dec 27, 2016 at 07:39 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -25,12 +25,13 @@ USE `storerec`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dailyremark`
+-- Table structure for table `dailysummary`
 --
 
-CREATE TABLE `dailyremark` (
+CREATE TABLE `dailysummary` (
   `id` int(11) NOT NULL,
   `date_of_amount` date NOT NULL,
+  `department_id` int(11) NOT NULL,
   `total_amount` int(11) NOT NULL DEFAULT '0',
   `remark` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -85,11 +86,12 @@ CREATE TABLE `sellrecord` (
 --
 
 --
--- Indexes for table `dailyremark`
+-- Indexes for table `dailysummary`
 --
-ALTER TABLE `dailyremark`
+ALTER TABLE `dailysummary`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `date_amount` (`date_of_amount`);
+  ADD KEY `date_amount` (`date_of_amount`),
+  ADD KEY `department_id` (`department_id`);
 
 --
 -- Indexes for table `department`
@@ -117,10 +119,10 @@ ALTER TABLE `sellrecord`
 --
 
 --
--- AUTO_INCREMENT for table `dailyremark`
+-- AUTO_INCREMENT for table `dailysummary`
 --
-ALTER TABLE `dailyremark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `dailysummary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `department`
 --
@@ -135,7 +137,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `sellrecord`
 --
 ALTER TABLE `sellrecord`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
