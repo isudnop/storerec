@@ -9,7 +9,7 @@
     </h1>
     <form action="/backoffice-daily-report" method="post">
         <div class=" col-md-4 col-md-offset-4 top-buffer fill-row">
-        <input type="text" placeholder="2016-01-01" name="date">
+        <input type="text" placeholder="{{ $currentDate }}" name="date">
             <button type="submit" class="btn btn-lg btn-primary" value="submit">เลือก</button>
         </div>
     <input type="hidden" name="_token" value="{{ csrf_token() }}">

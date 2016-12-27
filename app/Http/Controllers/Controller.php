@@ -8,7 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\SellRecord;
 use App\Models\Sales;
-use App\Models\DailyRemark;
+use App\Models\DailySummary;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -33,7 +33,7 @@ class Controller extends BaseController
         $rec->department_id = $params['department_id'];
         $rec->save();
         
-        $daily = DailyRemark::firstOrCreate(['date_of_amount' => date('Y-m-d')]);
+        $daily = DailySummary::firstOrCreate(['date_of_amount' => date('Y-m-d') , 'department_id' => $params['department_id']]);
         $daily->total_amount = $daily->total_amount + $params['sell_amount'];
         $daily->save();
         
@@ -83,7 +83,7 @@ class Controller extends BaseController
     
     public function backOfficeShowSummaryReport(Request $request)
     {
-        $daily  = new DailyRemark();
+        $daily  = new DailySummary();
         $result = $daily->getLatestReport(30);
         
         $graphLabel = [];
