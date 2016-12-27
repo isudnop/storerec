@@ -9,11 +9,17 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [ {!! implode(",", $graphLabel) !!}],
-            datasets: [{
-                label: 'ยอดขาย',
-                data: [{{ implode(",", $graphData)}}],
-            }]
+            labels: [ {!! implode(",", array_reverse($graphLabel)) !!}],
+            datasets: [
+                @foreach ($graphData as $key => $value)
+                    {
+                    label: "{{ $key }}",
+                    data: [{{ implode(",", array_reverse($value)) }}],
+                    borderColor : "{{ $graphColor[$key]}}",
+                    fill : false
+                    },
+                @endforeach
+            ]
         },
         options: {
             scales: {

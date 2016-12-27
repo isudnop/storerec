@@ -19,4 +19,9 @@ class DailySummary extends Model
     {
         return $this->orderBy('date_of_amount','desc')->limit($limit)->get();
     }
+    
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department');
+    }
 }
