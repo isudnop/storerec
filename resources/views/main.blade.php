@@ -1,8 +1,8 @@
 @include('partials.header')
 <div class="container content-center">
-    <h1 class="col-md-4 col-md-offset-4">ระบบร้าน</h1>
+    <h1 class="">ระบบร้าน</h1>
         <form action="/record-amount" method="post">
-            <div class="row top-buffer">
+            <div class="row form-block top-buffer">
                     @if (!empty($success))
                         <div class="row col-md-4 col-md-offset-4 alert alert-success" role="alert">
                             <strong>บันทึกเสร็จสิ้น!</strong> 
@@ -13,17 +13,17 @@
                             <strong>กรอกข้อมูลผิดพลาด!</strong> 
                         </div>
                     @endif
-                    <div class="row col-md-6 col-md-offset-3 top-buffer fill-row">
+                    <div class="row  top-buffer fill-row">
                         <h1><span class="label label-danger">รหัสแผนก</span> : <input type="text" placeholder=  "รหัส" name="department_id" value="" autofocus="autofocus" required></h1>
                     </div>
-                    <div class="row col-md-6 col-md-offset-3 top-buffer fill-row ">
+                    <div class="row top-buffer fill-row ">
                         <h1><span class="label label-success">ยอดสินค้า</span> : <input type="text" placeholder="บาท" id="amount" name="sell_amount" value="" required></h1>
                     </div>
-                    <div class="row col-md-6 col-md-offset-3 top-buffer fill-row">
+                    <div class="row top-buffer fill-row">
                         <h1><span class="label label-info">รหัสผู้ขาย</span> : <input type="text" placeholder="รหัส" name="sales_id" value="" required></h1>
                     </div>
 
-                <div class="col-md-4 col-md-offset-4 top-buffer">
+                <div class="top-buffer">
                     <button type="submit" class="btn btn-lg btn-primary" value="submit">บันทึก!</button>
                 </div>
             </div>
