@@ -60,7 +60,9 @@ class Controller extends BaseController
     
     public function backOfficeShowDailyReport(Request $request)
     {
-        $this->checkAdminLoginCookie();
+        if(empty(Cookie::get('authAdmin')) || Cookie::get('authAdmin') !== env('COOKIE_VALUE')){    
+            return redirect()->route('show-login');
+        }
         
         $labelColor = ['primary', 'success', 'info', 'warning'];
         $params = $request->only('date');
@@ -86,7 +88,9 @@ class Controller extends BaseController
     
     public function backOfficeShowSummaryReport(Request $request)
     {
-        $this->checkAdminLoginCookie();
+        if(empty(Cookie::get('authAdmin')) || Cookie::get('authAdmin') !== env('COOKIE_VALUE')){    
+            return redirect()->route('show-login');
+        }
         
         $daily  = new DailySummary();
         $result = $daily->getLatestReport(30);
@@ -158,12 +162,5 @@ class Controller extends BaseController
  
         //Return rgb(a) color string
         return $output;
-    }
-    
-    private function checkAdminLoginCookie()
-    {
-        if(empty(Cookie::get('authAdmin')) || Cookie::get('authAdmin') !== env('COOKIE_VALUE')){
-            return redirect()->route('show-login');
-        }
     }
 }
