@@ -30,7 +30,7 @@ class LoginController extends Controller
     public function doLogin(Request $request)
     {
         if ($request->get('password') === env('ADMIN_PASSWORD')) {
-            $cookie = Cookie::make('authAdmin', md5(rand()));
+            $cookie = Cookie::make('authAdmin', env('COOKIE_VALUE'));
             
             return redirect('backoffice-daily-report')->withCookie($cookie);
         }

@@ -11,6 +11,7 @@ use App\Models\Sales;
 use App\Models\DailySummary;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Cookie;
 
 class Controller extends BaseController
 {
@@ -59,6 +60,8 @@ class Controller extends BaseController
     
     public function backOfficeShowDailyReport(Request $request)
     {
+        $this->checkAdminLoginCookie();
+        
         $labelColor = ['primary', 'success', 'info', 'warning'];
         $params = $request->only('date');
         $date   = $params['date'] ?? date('Y-m-d');
@@ -83,13 +86,16 @@ class Controller extends BaseController
     
     public function backOfficeShowSummaryReport(Request $request)
     {
+        $this->checkAdminLoginCookie();
+        
         $daily  = new DailySummary();
         $result = $daily->getLatestReport(30);
         $colorPalate = ['#BB8FCE','#EC7063','#85C1E9','#F9E79F'];
+        $totalIndex = 'Total';
         
         $graphLabel = [];
-        $graphData = ['All' =>[] ];
-        $graphColor = ['All' => $colorPalate[0]];
+        $graphData = [$totalIndex =>[] ];
+        $graphColor = [$totalIndex => $colorPalate[0]];
         foreach($result as $res){
             $strDate = "\"" . $res->date_of_amount . "\"";
             if(!in_array($strDate, $graphLabel)){
@@ -100,10 +106,10 @@ class Controller extends BaseController
                 $graphColor[$res->department->department_name] =  $this->hex2rgba($colorPalate[$res->department_id] ?? $colorPalate[0]);
             }
             
-            if (isset($graphData['All'][$res->date_of_amount])) {
-                $graphData['All'][$res->date_of_amount] += $res->total_amount;
+            if (isset($graphData[$totalIndex][$res->date_of_amount])) {
+                $graphData[$totalIndex][$res->date_of_amount] += $res->total_amount;
             }else{
-                $graphData['All'][$res->date_of_amount] = $res->total_amount;
+                $graphData[$totalIndex][$res->date_of_amount] = $res->total_amount;
             }
             
             $graphData[$res->department->department_name][$res->date_of_amount] = $res->total_amount;
@@ -152,5 +158,12 @@ class Controller extends BaseController
  
         //Return rgb(a) color string
         return $output;
+    }
+    
+    private function checkAdminLoginCookie()
+    {
+        if(empty(Cookie::get('authAdmin')) || Cookie::get('authAdmin') !== env('COOKIE_VALUE')){
+            return redirect()->route('show-login');
+        }
     }
 }
