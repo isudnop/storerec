@@ -34,7 +34,7 @@ class LoginController extends Controller
             
             return redirect('backoffice-daily-report')->withCookie($cookie);
         }
-        $this->showLogin();
+        return redirect('backoffice-login');
     }
     
     /**

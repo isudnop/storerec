@@ -1,6 +1,5 @@
 @include('partials.header')
 <div class="container content-center">
-    <h1 class="col-md-4 col-md-offset-4">ระบบร้าน</h1>
         <form action="/record-amount" method="post">
             <div class="row form-block top-buffer">
                     @if (!empty($success))
