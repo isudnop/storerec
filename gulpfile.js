@@ -28,7 +28,7 @@ elixir(function(mix) {
     mix.copy(chartJsPath + '/Chart.min.js', 'public/js');
     
     mix.copy('resources/assets/js', 'public/js');
-    mix.copy('resources/assets/sass/jquery-ui.css', 'public/css');
+    mix.copy('resources/assets/css/jquery-ui.css', 'public/css');
     mix.copy('resources/assets/images', 'public/css/images');
     
 });
