@@ -14,13 +14,13 @@
                         </div>
                     @endif
                     <div class="row  top-buffer fill-row">
-                        <h1><span class="label label-danger">รหัสแผนก</span> : <input type="text" placeholder=  "รหัส" name="department_id" value="" autofocus="autofocus" required></h1>
+                        <h1><span class="label label-danger">รหัสแผนก</span> : <input type="tel" placeholder=  "รหัส" name="department_id" value="" autofocus="autofocus" required></h1>
                     </div>
                     <div class="row top-buffer fill-row ">
-                        <h1><span class="label label-success">ยอดสินค้า</span> : <input type="text" placeholder="บาท" id="amount" name="sell_amount" value="" required></h1>
+                        <h1><span class="label label-success">ยอดสินค้า</span> : <input type="tel" placeholder="บาท" id="amount" name="sell_amount" value="" required></h1>
                     </div>
                     <div class="row top-buffer fill-row">
-                        <h1><span class="label label-info">รหัสผู้ขาย</span> : <input type="text" placeholder="รหัส" name="sales_id" value="" required></h1>
+                        <h1><span class="label label-info">รหัสผู้ขาย</span> : <input type="tel" placeholder="รหัส" name="sales_id" value="" required></h1>
                     </div>
 
                 <div class="top-buffer">
