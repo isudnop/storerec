@@ -22,6 +22,8 @@
     <script src="js/jquery-ui.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="css/jquery-ui.css">
   </head>
   <body>
       

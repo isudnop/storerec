@@ -1,5 +1,12 @@
 @include('partials.header')
 @include('partials.navbar')
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+  } );
+  </script>
 <div class="container content-center">
     <h1 class="col-md-6 col-md-offset-2">
         รายงานประจำวัน <span class="label label-warning">{{ date('d M Y', strtotime($currentDate))}}</span>
@@ -9,7 +16,7 @@
     </h1>
     <form action="/backoffice-daily-report" method="post">
         <div class=" col-md-4 col-md-offset-4 top-buffer fill-row">
-        <input type="text" placeholder="{{ $currentDate }}" name="date">
+        <input type="text" placeholder="{{ $currentDate }}" name="date" id="datepicker">
             <button type="submit" class="btn btn-lg btn-primary" value="submit">เลือก</button>
         </div>
     <input type="hidden" name="_token" value="{{ csrf_token() }}">

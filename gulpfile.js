@@ -29,5 +29,6 @@ elixir(function(mix) {
     
     mix.copy('resources/assets/js/jquery-3.1.1.min.js', 'public/js');
     mix.copy('resources/assets/js/jquery-ui.min.js', 'public/js');
+    mix.copy('resources/assets/sass/jquery-ui.css', 'public/css');
     
 });
