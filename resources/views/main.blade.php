@@ -21,7 +21,9 @@
                     <div class="row top-buffer fill-row">
                         <h1><span class="label label-info">รหัสผู้ขาย</span> : <input type="tel" placeholder="รหัส" name="sales_id" value="" required></h1>
                     </div>
-
+                    <!--
+                    Calculator section (in progress)
+                    -->
                 <div class="top-buffer">
                     <button type="submit" class="btn btn-lg btn-primary" value="submit">บันทึก!</button>
                 </div>
