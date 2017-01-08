@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SellRecord extends Model
 {
     protected $fillable = [
-        'sell_amount', 'sales_id', 'department_id'
+        'sell_amount', 'sales_id', 'department_id', 'endday_at'
     ];
     
     protected $table = 'sellrecord';
@@ -23,7 +23,7 @@ class SellRecord extends Model
     public function getTotalByDate($date)
     {
         return $this
-        ->whereDate('created_at', '=', $date)
+        ->whereDate('endday_at', '=', $date)
         ->sum('sell_amount');
     }
     
@@ -31,7 +31,7 @@ class SellRecord extends Model
     {
         return $this
         ->selectRaw('department_id, sum(sell_amount) as sum_sell')
-        ->whereDate('created_at', '=', $date)
+        ->whereDate('endday_at', '=', $date)
         ->groupBy('department_id')
         ->get();
     }
@@ -40,7 +40,7 @@ class SellRecord extends Model
     {
         return $this
         ->selectRaw('sales_id, sum(sell_amount) as sum_sell, count(sell_amount) as count_sell')
-        ->whereDate('created_at', '=', $date)
+        ->whereDate('endday_at', '=', $date)
         ->groupBy('sales_id')
         ->get();
     }
@@ -49,7 +49,7 @@ class SellRecord extends Model
     {
         return $this
         ->selectRaw('sales_id, department_id, sum(sell_amount) as sum_sell, count(sell_amount) as count_sell')
-        ->whereDate('created_at', '=', $date)
+        ->whereDate('endday_at', '=', $date)
         ->where('sales_id', '=', $sales_id)
         ->groupBy('sales_id')
         ->groupBy('department_id')
@@ -64,5 +64,12 @@ class SellRecord extends Model
     public function department()
     {
         return $this->belongsTo('\App\Models\Department');
+    }
+    
+    public function endingDay()
+    {
+        $this->where('endday_at', '=', NULL)->update([
+            'endday_at' => date('Y-m-d')
+        ]);
     }
 }

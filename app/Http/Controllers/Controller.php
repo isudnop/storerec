@@ -34,9 +34,9 @@ class Controller extends BaseController
         $rec->department_id = $params['department_id'];
         $rec->save();
         
-        $daily = DailySummary::firstOrCreate(['date_of_amount' => date('Y-m-d') , 'department_id' => $params['department_id']]);
+        /*$daily = DailySummary::firstOrCreate(['date_of_amount' => date('Y-m-d') , 'department_id' => $params['department_id']]);
         $daily->total_amount = $daily->total_amount + $params['sell_amount'];
-        $daily->save();
+        $daily->save();*/
         
         $latestRecord = $rec->getFiveLatestRec();
         
@@ -126,15 +126,30 @@ class Controller extends BaseController
         ]);
     }
     
-    private function hex2rgba($color, $opacity = false) {
+    public function backofficeEndingDay(Request $request)
+    {
+        $rec = new SellRecord();
+        $rec->endingDay();
+        
+        $totalDep = $rec->getTotalDepartmentByDate(date('Y-m-d'));
+        
+        foreach ($totalDep as $tp) {
+            $daily = DailySummary::firstOrCreate(['date_of_amount' => date('Y-m-d') , 'department_id' => $tp->department_id]);
+            $daily->total_amount = $tp->sum_sell;
+            $daily->save();
+        }
+        return redirect('backoffice-daily-report');
+    } 
+    
+    private function hex2rgba($color, $opacity = false) 
+    {
+    	$default = 'rgb(0,0,0)';
+     
+    	//Return default if no color provided
+    	if(empty($color))
+              return $default; 
  
-	$default = 'rgb(0,0,0)';
- 
-	//Return default if no color provided
-	if(empty($color))
-          return $default; 
- 
-	//Sanitize $color if "#" is provided 
+	    //Sanitize $color if "#" is provided 
         if ($color[0] == '#' ) {
         	$color = substr( $color, 1 );
         }

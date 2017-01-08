@@ -17,6 +17,7 @@ Route::post('/record-amount', 'Controller@saveRecord')->name('save-record');
 Route::get('/backoffice-login', 'LoginController@showLogin')->name('show-login');
 Route::post('/backoffice-login', 'LoginController@doLogin')->name('do-login');
 
+Route::post('/backoffice-ending-day', 'Controller@backofficeEndingDay')->name('bo-rp-ed');
 Route::match(['get', 'post'], '/backoffice-daily-report', 'Controller@backOfficeShowDailyReport')->name('bo-rp-dl');
 Route::get('/backoffice-summary-report', 'Controller@backOfficeShowSummaryReport')->name('summary-report');
 

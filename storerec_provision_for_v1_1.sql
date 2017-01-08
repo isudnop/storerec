@@ -1,0 +1,2 @@
+ALTER TABLE `sellrecord` ADD `endday_at` DATE NULL DEFAULT NULL AFTER `department_id`, ADD INDEX `endday` (`endday_at`);
+UPDATE `sellrecord` SET `endday_at` = STR_TO_DATE(created_at,'%Y-%m-%d') WHERE `endday_at` IS NULL;

@@ -22,6 +22,19 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </form>
     
+    @if (count($totalDep) === 0)
+        <form action="/backoffice-ending-day" method="post">
+            <div class=" col-md-6 col-md-offset-3 top-buffer fill-row">
+                <div class="alert alert-danger">
+                    <strong>วันดังกล่าวอาจไม่มีข้อมูล/หรือยังไม่ได้ปิดยอด</strong> 
+                    <button type="submit" class="btn btn-lg btn-primary" value="submit">ปิดยอดของวันนี้</button>
+                </div>
+                
+            </div>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        </form>
+    @endif
+    
     @foreach ($totalDep as $key => $td)
         <h1 class="col-md-4 col-md-offset-4">
             <span class="label label-{{ $labelColor[$key] ?? $labelColor[0]}}">{{ $td->department->department_name }}</span> 
