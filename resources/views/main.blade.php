@@ -13,19 +13,19 @@
                         </div>
                     @endif
                     <div class="row  top-buffer fill-row">
-                        <h1><span class="label label-danger">รหัสแผนก</span> : <input type="tel" placeholder=  "รหัส" name="department_id" value="" autofocus="autofocus" required></h1>
+                        <h1><span class="label label-danger">_____</span> : <input type="tel" placeholder=  "" name="department_id" value="" autofocus="autofocus" required></h1>
                     </div>
                     <div class="row top-buffer fill-row ">
-                        <h1><span class="label label-success">ยอดสินค้า</span> : <input type="tel" placeholder="บาท" id="amount" name="sell_amount" value="" required></h1>
+                        <h1><span class="label label-success">_____</span> : <input type="tel" placeholder="" id="amount" name="sell_amount" value="" required></h1>
                     </div>
                     <div class="row top-buffer fill-row">
-                        <h1><span class="label label-info">รหัสผู้ขาย</span> : <input type="tel" placeholder="รหัส" name="sales_id" value="" required></h1>
+                        <h1><span class="label label-info">_____</span> : <input type="tel" placeholder="" name="sales_id" value="" required></h1>
                     </div>
                     <!--
                     Calculator section (in progress)
                     -->
                 <div class="top-buffer">
-                    <button type="submit" class="btn btn-lg btn-primary" value="submit">บันทึก!</button>
+                    <button type="submit" class="btn btn-lg btn-primary" value="submit">_____</button>
                 </div>
             </div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
