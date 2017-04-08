@@ -15,19 +15,34 @@ class SellRecord extends Model
     
     protected $table = 'sellrecord';
     
-    public function getFiveLatestRec()
+    /**
+     * Get latest five sale rec fro database
+     * @param  integer $limit
+     * @return SellRecord|null
+     */
+    public function getFiveLatestRec(int $limit = 5) : SellRecord
     {
-        return $this->orderBy('created_at', 'desc')->limit(5)->get();
+        return $this->orderBy('created_at', 'desc')->limit($limit)->get() ?? null;
     }
     
-    public function getTotalByDate($date)
+    /**
+     * Get total sum of sale amount by specific date
+     * @param  string $date
+     * @return 
+     */
+    public function getTotalByDate(string $date)
     {
         return $this
         ->whereDate('endday_at', '=', $date)
         ->sum('sell_amount');
     }
     
-    public function getTotalDepartmentByDate($date)
+    /**
+     * Get total sum of each department store by specific date 
+     * @param  string $date [description]
+     * @return [type]       [description]
+     */
+    public function getTotalDepartmentByDate(string $date)
     {
         return $this
         ->selectRaw('department_id, sum(sell_amount) as sum_sell')
@@ -36,7 +51,12 @@ class SellRecord extends Model
         ->get();
     }
     
-    public function getTotalSaleByDate($date)
+    /**
+     * get 
+     * @param  string $date [description]
+     * @return [type]       [description]
+     */
+    public function getTotalSaleByDate(string $date)
     {
         return $this
         ->selectRaw('sales_id, sum(sell_amount) as sum_sell, count(sell_amount) as count_sell')
@@ -45,7 +65,13 @@ class SellRecord extends Model
         ->get();
     }
     
-    public function getSellDetailOfSaleByDate($sales_id, $date)
+    /**
+     * get sell rec for each sale by specific date
+     * @param  int    $sales_id [description]
+     * @param  string $date     [description]
+     * @return [type]           [description]
+     */
+    public function getSellDetailOfSaleByDate(int $sales_id, string $date)
     {
         return $this
         ->selectRaw('sales_id, department_id, sum(sell_amount) as sum_sell, count(sell_amount) as count_sell')
