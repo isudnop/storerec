@@ -1,4 +1,4 @@
-# Test store record system
+# Store record system
 personal code testing. //in progress
 
 [x] recordsystem
