@@ -20,8 +20,7 @@ class InitDataStore extends Migration
             $table->integer('total_amount')->default(0);
             $table->text('remark');
             $table->timestamps();
-            $table->primary('id');
-            $table->index('date_amount');
+            $table->index('date_of_amount');
             $table->index('department_id');
         });
 
@@ -30,7 +29,6 @@ class InitDataStore extends Migration
             $table->char('department_code', 6);
             $table->char('department_name');
             $table->timestamps();
-            $table->primary('id');
         });
 
         Schema::create('sales', function (Blueprint $table) {
@@ -38,7 +36,6 @@ class InitDataStore extends Migration
             $table->char('sale_code', 6);
             $table->char('name');
             $table->timestamps();
-            $table->primary('id');
         });
 
         Schema::create('sellrecord', function (Blueprint $table) {
@@ -48,10 +45,8 @@ class InitDataStore extends Migration
             $table->integer('department_id');
             $table->date('endday_at');
             $table->timestamps();
-            $table->primary('id');
             $table->index('department_id');
-            $table->index('sale_id');
-            $table->index('created_at');
+            $table->index('sales_id');
             $table->index('endday_at');
         });
     }
