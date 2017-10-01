@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class SellRecord extends Model
 {
@@ -20,7 +22,7 @@ class SellRecord extends Model
      *
      * @return SellRecord|null
      */
-    public function getFiveLatestRec(int $limit = 5) : SellRecord
+    public function getFiveLatestRec(int $limit = 5) : Collection
     {
         return $this->orderBy('created_at', 'desc')->limit($limit)->get() ?? null;
     }
