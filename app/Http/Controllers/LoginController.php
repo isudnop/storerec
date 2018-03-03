@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Cookie;
 use Response;
 
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function doLogin(Request $request): Response
+    public function doLogin(Request $request)
     {
         if ($request->get('password') === env('ADMIN_PASSWORD')) {
             $cookie = Cookie::make('authAdmin', env('COOKIE_VALUE'));

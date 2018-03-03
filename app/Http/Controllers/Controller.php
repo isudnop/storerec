@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 use App\Models\SellRecord;
 use App\Models\Sales;
 use App\Models\DailySummary;
@@ -93,7 +94,8 @@ class Controller extends BaseController
         }
 
         $daily = new DailySummary();
-        $result = $daily->getLatestReport(30);
+        //3 Department x 30 day
+        $result = $daily->getLatestReport(90);
         $colorPalate = ['#BB8FCE', '#EC7063', '#85C1E9', '#F9E79F'];
         $totalIndex = 'Total';
 

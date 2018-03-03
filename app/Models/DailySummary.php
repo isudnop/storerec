@@ -15,7 +15,7 @@ class DailySummary extends Model
 
     public function getLatestReport(int $limit = 30)
     {
-        return $this->orderBy('date_of_amount', 'desc')->limit($limit)->get();
+        return $this->groupBy('date_of_amount','department_id','total_amount')->orderBy('date_of_amount', 'desc')->limit($limit)->get();
     }
 
     public function department()
